@@ -189,7 +189,37 @@
   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/offcanvas.js') }}"></script>
   <script src="{{ url_for('static', filename='js/carousel-heights.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jssor.slider.mini.js') }}"></script>
 
+  <script>
+    $(document).ready(function ($) {
+        var options = {
+            $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$,
+                $ChanceToShow: 2
+            }
+        };
+        var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+
+        //responsive code begin
+        function ScaleSlider() {
+            var parentWidth = $('#slider1_container').parent().width();
+            if (parentWidth) {
+                jssor_slider1.$ScaleWidth(parentWidth);
+            }
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+        //Scale slider after document ready
+        ScaleSlider();
+
+        //Scale slider while window load/resize/orientationchange.
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+        //responsive code end
+    });
+  </script>
 
   <!-- Any page specific javascript can be included in your child templates in a page_javascript block -->
   {% block page_javascript %}
