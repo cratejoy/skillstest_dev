@@ -192,33 +192,42 @@
   <script src="{{ url_for('static', filename='js/jssor.slider.mini.js') }}"></script>
 
   <script>
-    $(document).ready(function ($) {
-        var options = {
-            $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$,
-                $ChanceToShow: 2
-            }
-        };
-        var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+        jQuery(document).ready(function ($) {
+            var options = {
+                $AutoPlay: true,              //[Optional] Whether to auto play, to enable slideshow, this option must be set to true
+                $AutoPlaySteps: 1,            //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled)
+                $AutoPlayInterval: 3000,      //[Optional] Interval (in milliseconds) to go for next slide
+                $PauseOnHover: 3,             //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+                $SlideDuration: 500,           //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,     //[Optional] Minimum drag offset to trigger slide , default value is 20
+                $SlideWidth: 467 ,             //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                $SlideHeight: 223,             //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 15,             //[Optional] Space between each slide in pixels
+                $DisplayPieces: 3,             //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,           //[Optional] The offset position to park slide (this options applys only when slideshow disabled)
+                $UISearchMode: 1,              //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components
+                $PlayOrientation: 1,           //[Optional] Orientation to play slide, 1 horizontal, 2 vertical, 5 horizontal reverse, 6 vertical reverse
+                $DragOrientation: 1,           //[Optional] Orientation to drag slide, 0 no drag, 1 horizontal, 2 vertical, 3 either
+            };
 
-        //responsive code begin
-        function ScaleSlider() {
-            var parentWidth = $('#slider1_container').parent().width();
-            if (parentWidth) {
-                jssor_slider1.$ScaleWidth(parentWidth);
-            }
-            else
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+            //responsive code begin
+            function ScaleSlider() {
+              var bodyWidth = document.body.clientWidth;
+              if (bodyWidth)
+                // jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1400));
+                jssor_slider1.$ScaleWidth(bodyWidth);
+              else
                 window.setTimeout(ScaleSlider, 30);
-        }
-        //Scale slider after document ready
-        ScaleSlider();
+            }
+            ScaleSlider();
 
-        //Scale slider while window load/resize/orientationchange.
-        $(window).bind("load", ScaleSlider);
-        $(window).bind("resize", ScaleSlider);
-        $(window).bind("orientationchange", ScaleSlider);
-        //responsive code end
-    });
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            //responsive code end
+        });
   </script>
 
   <!-- Any page specific javascript can be included in your child templates in a page_javascript block -->
