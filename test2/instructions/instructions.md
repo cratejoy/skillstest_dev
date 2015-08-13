@@ -36,7 +36,7 @@ Non Technical Merchant
 * API documentation: http://docs.cratejoydev.apiary.io/#reference/subscription/subscriptions-collection/list-all-subscriptions
   * Use "http://api.cratejoy.com" for the base of the url (rather than http://private-anon-c03ce0db1-cratejoydev.apiary-mock.com as the docs say)
   * Do NOT use "https" use "http"
-* Use the client_id "api_test" and the client_secret "api_test" for API credentials
+* Use the client_id "apitest" and the client_secret "apitest" for API credentials
   * The API uses HTTP Basic authentication which is explained in the API documentation
  
 ### Notes
